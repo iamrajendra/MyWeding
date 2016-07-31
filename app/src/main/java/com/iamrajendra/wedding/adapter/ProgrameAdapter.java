@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Created by rajendraverma on 30-07-2016.
  */
-public class ProgrameAdapter extends RecyclerView.Adapter<ProgrameAdapter.ProgrameHolder>{
+public abstract class ProgrameAdapter extends RecyclerView.Adapter<ProgrameAdapter.ProgrameHolder> {
     private Context mContext;
     private Activity mActivity;
     private List<Programe> mList_programeList;
@@ -29,13 +29,20 @@ public class ProgrameAdapter extends RecyclerView.Adapter<ProgrameAdapter.Progra
 
     @Override
     public ProgrameHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ProgrameHolder(mActivity.getLayoutInflater().inflate(R.layout.programe_rva,null));
+        return new ProgrameHolder(mActivity.getLayoutInflater().inflate(R.layout.programe_rva, null));
     }
 
     @Override
-    public void onBindViewHolder(ProgrameHolder holder, int position) {
+    public void onBindViewHolder(ProgrameHolder holder, final int position) {
         holder.mTextView_title.setText(mList_programeList.get(position).getTitle());
         holder.mImageView_image.setImageResource(mList_programeList.get(position).getBg_image());
+        holder.mTextView_date.setText(mList_programeList.get(position).getDate());
+        holder.mImageView_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgrameAdapter.this.onClick(position);
+            }
+        });
 
     }
 
@@ -47,11 +54,15 @@ public class ProgrameAdapter extends RecyclerView.Adapter<ProgrameAdapter.Progra
     public class ProgrameHolder extends RecyclerView.ViewHolder {
         private TextView mTextView_title;
         private ImageView mImageView_image;
+        private TextView mTextView_date;
 
         public ProgrameHolder(View itemView) {
             super(itemView);
-            mTextView_title = (TextView)itemView.findViewById(R.id.programe_rva_title_tv);
+            mTextView_title = (TextView) itemView.findViewById(R.id.programe_rva_title_tv);
             mImageView_image = (ImageView) itemView.findViewById(R.id.programe_rva_image_iv);
+            mTextView_date = (TextView) itemView.findViewById(R.id.programe_rva_date_tv);
         }
     }
+
+    protected abstract void onClick(int position);
 }

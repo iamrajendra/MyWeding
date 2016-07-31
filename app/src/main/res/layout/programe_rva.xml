@@ -17,4 +17,11 @@
         android:textColor="@android:color/white"
 
         android:layout_gravity="center"/>
+    <TextView
+        android:id="@+id/programe_rva_date_tv"
+        android:textColor="@android:color/white"
+        android:text="november 11th 2016"
+        android:layout_gravity="bottom|right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </FrameLayout>

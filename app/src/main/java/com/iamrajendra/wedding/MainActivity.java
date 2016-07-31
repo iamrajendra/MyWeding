@@ -2,6 +2,7 @@ package com.iamrajendra.wedding;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -37,10 +38,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void populateProgrameList() {
-        mProgrameAdapter_programeList = new ProgrameAdapter(mContext, mActivity, getProgrameList());
+        mProgrameAdapter_programeList = new ProgrameAdapter(mContext, mActivity, getProgrameList()) {
+            @Override
+            protected void onClick(int position) {
+                callCardActivity();
+
+            }
+        };
         mRecyclerView_programeList.setAdapter(mProgrameAdapter_programeList);
         mRecyclerView_programeList.addItemDecoration(new SpacesItemDecoration(2));
 
+    }
+
+    private void callCardActivity() {
+    Intent intent_cardActivity = new Intent(mContext,Card.class);
+        startActivity(intent_cardActivity);
     }
 
     private void configToolbar() {
@@ -62,10 +74,10 @@ public class MainActivity extends AppCompatActivity {
 
     public List<Programe> getProgrameList() {
         List<Programe> programes = new ArrayList<>();
-        programes.add(new Programe(R.drawable.bg_barat, "Tilak"));
-        programes.add(new Programe(R.drawable.bg_maan, "Maan"));
-        programes.add(new Programe(R.drawable.bg_barat, "Baarat"));
-        programes.add(new Programe(R.drawable.bg_barat, "Reception"));
+        programes.add(new Programe(R.drawable.bg_barat, "Tilak","11 november 2016"));
+        programes.add(new Programe(R.drawable.bg_maan, "Maan","12 november 2016"));
+        programes.add(new Programe(R.drawable.bg_barat, "Baarat","13 november 2016"));
+        programes.add(new Programe(R.drawable.bg_barat, "Reception","14 november 2016"));
         return programes;
     }
 }
